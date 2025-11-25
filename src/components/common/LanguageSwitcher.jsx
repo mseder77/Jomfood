@@ -86,7 +86,7 @@ const LanguageSwitcher = () => {
                   e.stopPropagation();
                 }}
                 className={`w-full text-left px-4 py-2 hover:bg-gray-50 transition-colors flex items-center gap-2 notranslate ${
-                  currentLang === lang.code ? 'bg-primary/10 text-primary font-medium' : 'text-gray-700'
+                  i18n.language === lang.code ? 'bg-primary/10 text-primary font-medium' : 'text-gray-700'
                 }`}
                 translate="no"
               >
