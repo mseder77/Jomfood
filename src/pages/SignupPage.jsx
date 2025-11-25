@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Check } from 'lucide-react';
 import { api } from '../utils/api';
 import { googleOAuthAPI } from '../utils/api';
 import { useUser } from '../context/UserContext';
@@ -18,6 +19,7 @@ const SignupPage = () => {
   const { t } = useTranslation();
   const [form, setForm] = useState(initialForm);
   const [submitting, setSubmitting] = useState(false);
+  const [agreeToPrivacy, setAgreeToPrivacy] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +30,10 @@ const SignupPage = () => {
     e.preventDefault();
     if (!form.name || !form.email || !form.password) {
       toast.error(t('auth.requiredSignupFields'));
+      return;
+    }
+    if (!agreeToPrivacy) {
+      toast.error('Please agree to the Privacy Policy to continue');
       return;
     }
 
@@ -176,10 +182,37 @@ const SignupPage = () => {
               </div>
             </div>
 
+            {/* Privacy Policy Agreement */}
+            <div className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id="privacy-policy"
+                  name="privacy-policy"
+                  type="checkbox"
+                  checked={agreeToPrivacy}
+                  onChange={(e) => setAgreeToPrivacy(e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary-200 border-gray-300 rounded"
+                  required
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="privacy-policy" className="text-gray-700 cursor-pointer">
+                  I agree to the{' '}
+                  <Link 
+                    to="/privacy-policy" 
+                    target="_blank"
+                    className="text-primary hover:text-primary-600 underline font-medium"
+                  >
+                    Privacy Policy
+                  </Link>
+                </label>
+              </div>
+            </div>
+
             <button
               type="submit"
-              disabled={submitting}
-              className="w-full bg-primary hover:bg-primary-600 disabled:opacity-60 text-white px-4 py-2 rounded font-medium text-sm transition-colors"
+              disabled={submitting || !agreeToPrivacy}
+              className="w-full bg-primary hover:bg-primary-600 disabled:opacity-60 disabled:cursor-not-allowed text-white px-4 py-2 rounded font-medium text-sm transition-colors"
             >
               {submitting ? t('auth.creatingAccount') : t('auth.createAccount')}
             </button>
@@ -203,6 +236,13 @@ const SignupPage = () => {
 
             <div className="text-sm text-gray-600 mt-2 text-center">
               {t('auth.haveAccount')} <Link to="/login" className="text-primary font-medium">{t('auth.loginCta')}</Link>
+            </div>
+            
+            {/* Privacy Policy Link */}
+            <div className="text-xs text-gray-500 mt-4 text-center">
+              <Link to="/privacy-policy" className="hover:text-primary transition-colors underline">
+                Privacy Policy
+              </Link>
             </div>
           </div>
         </div>
