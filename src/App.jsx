@@ -11,6 +11,7 @@ import ProfilePage from './pages/ProfilePage';
 import DealsPage from './pages/DealsPage';
 import DealsPage2 from './pages/DealsPage2';
 import DealValidityPage from './pages/DealValidityPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ScrollToTop from './components/common/ScrollToTop';
 import GoogleTranslate from './components/common/GoogleTranslate';
 
@@ -33,6 +34,7 @@ function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/deals-2" element={<DealsPage />} />
             <Route path="/deal-validity" element={<DealValidityPage />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           </Routes>
         </div>
       </UserProvider>

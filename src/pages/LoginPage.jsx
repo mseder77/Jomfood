@@ -190,6 +190,13 @@ const LoginPage = () => {
           <div className="text-sm text-gray-600 mt-4 text-center">
             {t('auth.noAccount')} <Link to="/signup" className="text-primary font-medium">{t('auth.signupCta')}</Link>
           </div>
+          
+          {/* Privacy Policy Link */}
+          <div className="text-xs text-gray-500 mt-6 text-center">
+            <Link to="/privacy-policy" className="hover:text-primary transition-colors underline">
+              Privacy Policy
+            </Link>
+          </div>
           </div>
         </div>
       </div>
