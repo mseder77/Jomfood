@@ -1,4 +1,14 @@
-// API Configuration and Utilities
+// Import Supabase-based APIs
+export {
+  dealsAPI,
+  categoriesAPI,
+  dealCategoriesAPI,
+  restaurantsAPI,
+  dealValidityAPI,
+  googleOAuthAPI
+} from './api-supabase';
+
+// API Configuration and Utilities (legacy, kept for compatibility)
 const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL || 'http://localhost:5055/api';
 
 // Generic API request function
@@ -90,56 +100,6 @@ export const restaurantAPI = {
   toggleFavorite: (id) => api.post(`/restaurants/${id}/favorite`),
 };
 
-// Categories API endpoints
-export const categoriesAPI = {
-  // Get all categories
-  getCategories: (params = {}) => {
-    const queryParams = new URLSearchParams(params);
-    return api.get(`/jomfood-categories?${queryParams}`);
-  },
-
-  // Get single category
-  getCategory: (id) => api.get(`/jomfood-categories/${id}`),
-};
-
-// Restaurants API endpoints
-export const restaurantsAPI = {
-  // Get restaurants by category
-  getRestaurantsByCategory: (categoryId, params = {}) => {
-    const queryParams = new URLSearchParams();
-    queryParams.append('category_id', categoryId);
-    
-    // Add pagination params
-    if (params.page) queryParams.append('page', params.page);
-    if (params.limit) queryParams.append('limit', params.limit);
-    
-    // Add location params for distance-based sorting
-    if (params.user_lat) queryParams.append('user_lat', params.user_lat);
-    if (params.user_lng) queryParams.append('user_lng', params.user_lng);
-    if (params.sort_by) queryParams.append('sort_by', params.sort_by);
-    
-    return api.get(`/jomfood-settings/businesses?${queryParams}`);
-  },
-
-  // Get all restaurants
-  getRestaurants: (params = {}) => {
-    const queryParams = new URLSearchParams();
-    
-    // Add pagination params
-    if (params.page) queryParams.append('page', params.page);
-    if (params.limit) queryParams.append('limit', params.limit);
-    
-    // Add location params for distance-based sorting
-    if (params.user_lat) queryParams.append('user_lat', params.user_lat);
-    if (params.user_lng) queryParams.append('user_lng', params.user_lng);
-    if (params.sort_by) queryParams.append('sort_by', params.sort_by);
-    
-    return api.get(`/jomfood-settings/businesses?${queryParams}`);
-  },
-
-  // Get single restaurant
-  getRestaurant: (id) => api.get(`/jomfood-settings/businesses/${id}`),
-};
 
 // Filter API endpoints
 export const filterAPI = {
@@ -168,91 +128,6 @@ export const userAPI = {
   getProfile: () => api.get('/user/profile'),
 };
 
-// Deals API endpoints
-export const dealsAPI = {
-  // Get active deals (public, no auth required)
-  getActiveDeals: (queryString = '') => {
-    // If queryString is provided, use it directly
-    if (queryString) {
-      return api.get(`/jomfood-deals/active?${queryString}`);
-    }
-    
-    // Default call without any parameters
-    return api.get(`/jomfood-deals/active`);
-  },
 
-  // Get deal by ID (public, no auth required)
-  getDealById: (id) => api.get(`/jomfood-deals/detail/${id}`),
-
-  // Claim deal (requires customer_id)
-  claimDeal: (dealId, customerId) => {
-    return api.post(`/jomfood-deals/${dealId}/claim`, {
-      customer_id: customerId
-    });
-  },
-
-  // Get all available tags
-  getAllTags: () => api.get('/jomfood-deals/tags'),
-};
-
-// Deal Categories API endpoints
-export const dealCategoriesAPI = {
-  // Get active deal categories
-  getActiveDealCategories: (params = {}) => {
-    const queryParams = new URLSearchParams(params);
-    return api.get(`/jomfood-deal-categories/active?${queryParams}`);
-  },
-};
-
-// Deal Validity API endpoints
-export const dealValidityAPI = {
-  // Verify deal claim
-  verifyDeal: (claimId  , dealId, customerId, businessId, groupId) => {
-    const queryParams = new URLSearchParams({
-      claim_id: claimId,
-      deal_id: dealId,
-      customer_id: customerId,
-      business_id: businessId,
-      group_id: groupId
-    });
-    return api.get(`/deal-validity/verify?${queryParams}`);
-  },
-
-  // Mark deal as used
-  markDealAsUsed: (dealId, customerId, businessId, claimId) => {
-    return api.post('/deal-validity/mark-used', {
-      deal_id: dealId,
-      customer_id: customerId,
-      business_id: businessId,
-      claim_id: claimId
-    });
-  },
-
-  // Reject deal
-  rejectDeal: (dealId, customerId, businessId, claimId, reason = 'Invalid QR code or deal') => {
-    return api.post('/deal-validity/reject', {
-      deal_id: dealId,
-      customer_id: customerId,
-      business_id: businessId,
-      claim_id: claimId,
-      reason: reason
-    });
-  },
-};
-
-// Google OAuth API endpoints
-export const googleOAuthAPI = {
-  // Google OAuth authentication
-  authenticate: (userInfo) => {
-    return api.post('/auth/customer/google', {
-      idToken: userInfo.idToken,
-      email: userInfo.email,
-      name: userInfo.name,
-      picture: userInfo.picture,
-      given_name: userInfo.given_name,
-      family_name: userInfo.family_name
-    });
-  },
-};
 
 export default api;
