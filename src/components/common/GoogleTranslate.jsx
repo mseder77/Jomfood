@@ -75,11 +75,7 @@ const GoogleTranslate = () => {
           );
           
           console.log('TranslateElement created, waiting for select element...');
-          
-          // Start hiding UI immediately and continuously
-          hideUI();
-          monitorAndHide();
-          
+
           // Function to aggressively hide all Google Translate UI elements
           const hideUI = () => {
             try {
@@ -151,7 +147,7 @@ const GoogleTranslate = () => {
               console.warn('Error hiding Google Translate UI:', error);
             }
           };
-          
+
           // Continuously monitor and hide any Google Translate UI that appears
           const monitorAndHide = () => {
             const observer = new MutationObserver(() => {
@@ -174,6 +170,10 @@ const GoogleTranslate = () => {
               clearInterval(hideInterval);
             }, 10000);
           };
+
+          // Start hiding UI immediately and continuously (after functions are defined)
+          hideUI();
+          monitorAndHide();
 
           // Function to check if Google Translate is ready and dispatch event
           const checkReady = () => {
