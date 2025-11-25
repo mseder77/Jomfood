@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 import { Languages, ChevronDown } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 const LanguageSwitcher = () => {
+  const { i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en'); // Track Google Translate language (en = no translation, ms = Malay)
   const dropdownRef = useRef(null);
 
   const languages = [
@@ -11,103 +12,11 @@ const LanguageSwitcher = () => {
     { code: 'en', name: 'English', flag: '🇬🇧' }
   ];
 
-  // Get current language from Google Translate or localStorage
-  useEffect(() => {
-    // Check localStorage for saved language preference
-    const savedLang = localStorage.getItem('google_translate_lang') || 'en';
-    setCurrentLang(savedLang);
-    
-    // Also check if Google Translate has already set a language
-    const checkGoogleTranslateLang = () => {
-      try {
-        const select = document.querySelector('.goog-te-combo');
-        if (select && select.value) {
-          const lang = select.value === 'en' ? 'en' : (select.value === 'ms' ? 'ms' : 'en');
-          setCurrentLang(lang);
-          localStorage.setItem('google_translate_lang', lang);
-        } else {
-          // If Google Translate is ready but no language set, apply saved language
-          if (window.triggerGoogleTranslate && savedLang !== 'en') {
-            setTimeout(() => {
-              window.triggerGoogleTranslate(savedLang);
-            }, 500);
-          }
-        }
-      } catch (error) {
-        console.warn('Error checking Google Translate language:', error);
-      }
-    };
-    
-    // Listen for Google Translate ready event
-    const handleGoogleTranslateReady = () => {
-      checkGoogleTranslateLang();
-    };
-    
-    window.addEventListener('googleTranslateReady', handleGoogleTranslateReady);
-    
-    // Check immediately and after delays (Google Translate loads async)
-    checkGoogleTranslateLang();
-    const timer = setTimeout(checkGoogleTranslateLang, 500);
-    const timer2 = setTimeout(checkGoogleTranslateLang, 1500);
-    const timer3 = setTimeout(checkGoogleTranslateLang, 3000);
-    
-    return () => {
-      clearTimeout(timer);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-      window.removeEventListener('googleTranslateReady', handleGoogleTranslateReady);
-    };
-  }, []);
-
-  const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+  const currentLanguage = languages.find(lang => lang.code === i18n.language) || languages[1];
 
   const changeLanguage = (langCode) => {
-    // Prevent any URL changes
-    if (window.history && window.history.replaceState) {
-      // Remove any existing hash
-      if (window.location.hash) {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
-    }
-    
-    // Save to localStorage
-    localStorage.setItem('google_translate_lang', langCode);
-    setCurrentLang(langCode);
-    
-    // Trigger Google Translate
-    const triggerTranslation = () => {
-      // Use the global function which has built-in retry logic
-      if (window.triggerGoogleTranslate) {
-        window.triggerGoogleTranslate(langCode);
-      } else {
-        // Fallback: wait for the function to be available
-        const checkForFunction = (attempt = 0) => {
-          if (attempt >= 20) {
-            console.warn('Google Translate function not available after multiple attempts');
-            return;
-          }
-          
-          if (window.triggerGoogleTranslate) {
-            window.triggerGoogleTranslate(langCode);
-          } else {
-            setTimeout(() => checkForFunction(attempt + 1), 200);
-          }
-        };
-        checkForFunction();
-      }
-    };
-    
-    // Start triggering
-    triggerTranslation();
-    
+    i18n.changeLanguage(langCode);
     setIsOpen(false);
-    
-    // Ensure URL doesn't have hash after a short delay
-    setTimeout(() => {
-      if (window.location.hash) {
-        window.history.replaceState(null, '', window.location.pathname + window.location.search);
-      }
-    }, 100);
   };
 
   // Close dropdown when clicking outside

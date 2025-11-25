@@ -17,11 +17,10 @@ i18n
         translation: enTranslations
       }
     },
-    fallbackLng: 'en', // Use English as base language - Google Translate will translate the page
-    lng: 'en', // Fixed to English - Google Translate handles translation
+    fallbackLng: 'en',
     debug: false,
     interpolation: {
-      escapeValue: false // React already escapes values
+      escapeValue: false
     },
     detection: {
       order: ['localStorage', 'navigator'],

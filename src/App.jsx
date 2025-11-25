@@ -12,14 +12,12 @@ import DealsPage from './pages/DealsPage';
 import DealsPage2 from './pages/DealsPage2';
 import DealValidityPage from './pages/DealValidityPage';
 import ScrollToTop from './components/common/ScrollToTop';
-import GoogleTranslate from './components/common/GoogleTranslate';
 
 function App() {
   return (
     <ApiProvider>
       <UserProvider>
         <div className="App">
-          <GoogleTranslate />
           <ScrollToTop />
           <Toaster richColors position="top-right" />
           <Routes>
