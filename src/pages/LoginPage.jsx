@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../context/UserContext';
-import jomfoodLogo from '../assets/JomFood.png';
+import jomfoodLogo from '../assets/jomfood.png';
 import { toast } from '../utils/toast';
 import CommonLayout from '../components/layout/CommonLayout';
 import { reservation } from '../utils/reservation';
