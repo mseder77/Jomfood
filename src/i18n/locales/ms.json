@@ -79,7 +79,14 @@
     "loadingDeals": "Memuatkan tawaran...",
     "loadingTags": "Memuatkan tag...",
     "loadingCategories": "Memuatkan kategori...",
-    "noCategoriesAvailable": "Tiada kategori tersedia"
+    "noCategoriesAvailable": "Tiada kategori tersedia",
+    "percentageDeals": "Tawaran Peratusan",
+    "percentageDealsDesc": "Jimat dengan diskaun peratusan eksklusif",
+    "fixedDeals": "Tawaran Harga Tetap",
+    "fixedDealsDesc": "Hidangan hebat pada harga tetap yang berbaloi",
+    "comboDeals": "Tawaran Kombo",
+    "comboDealsDesc": "Pakej kombo istimewa untuk nilai maksimum",
+    "viewAll": "Lihat Semua"
   },
   "dealModal": {
     "completeDealDetails": "Butiran tawaran lengkap dan terma",

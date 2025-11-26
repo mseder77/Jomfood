@@ -79,7 +79,14 @@
     "loadingDeals": "Loading deals...",
     "loadingTags": "Loading tags...",
     "loadingCategories": "Loading categories...",
-    "noCategoriesAvailable": "No categories available"
+    "noCategoriesAvailable": "No categories available",
+    "percentageDeals": "Percentage Deals",
+    "percentageDealsDesc": "Save with exclusive percentage discounts",
+    "fixedDeals": "Fixed Price Deals",
+    "fixedDealsDesc": "Great meals at unbeatable fixed prices",
+    "comboDeals": "Combo Deals",
+    "comboDealsDesc": "Special combo bundles for maximum value",
+    "viewAll": "View All"
   },
   "dealModal": {
     "completeDealDetails": "Complete deal details and terms",

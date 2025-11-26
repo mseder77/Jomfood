@@ -9,12 +9,13 @@ import QRCodeModal from '../components/deals/QRCodeModal';
 import { toast } from '../utils/toast';
 import Header from '../components/layout/Header';
 import SearchInput from '../components/ui/SearchInput';
-import { Package, Flame, SlidersHorizontal, X, Tag, DollarSign, Percent, Sparkles, TrendingUp, TrendingDown, Clock, Plus, Star, Navigation, ChevronDown } from 'lucide-react';
+import { Package, Flame, SlidersHorizontal, X, Tag, DollarSign, Percent, Sparkles, TrendingUp, TrendingDown, Clock, Plus, Star, Navigation, ChevronDown, Gift } from 'lucide-react';
 import { useReservation } from '../hooks/useReservation';
 import { categoriesAPI, dealCategoriesAPI } from '../utils/api';
 import { useDebounce } from '../hooks/useDebounce';
 import { useGeolocation } from '../hooks/useGeolocation';
 import CategoryDealsSection from '../components/deals/CategoryDealsSection';
+import DealTypeSection from '../components/deals/DealTypeSection';
 // import Slider from "rc-slider";
 // import "rc-slider/assets/index.css";
 
@@ -1146,6 +1147,31 @@ const DealsPage2 = () => {
             <h2 className="text-3xl font-bold text-gray-900">{t("deals.hotDealsToday")}</h2>
           </div>
         </div>
+      </div>
+
+      {/* Deal Type Sections */}
+      <div className="bg-gray-50">
+        <DealTypeSection
+          dealType="percentage"
+          icon={Percent}
+          title={t("deals.percentageDeals")}
+          description={t("deals.percentageDealsDesc")}
+          userLocation={userLocation}
+        />
+        <DealTypeSection
+          dealType="fixed"
+          icon={DollarSign}
+          title={t("deals.fixedDeals")}
+          description={t("deals.fixedDealsDesc")}
+          userLocation={userLocation}
+        />
+        <DealTypeSection
+          dealType="combo"
+          icon={Gift}
+          title={t("deals.comboDeals")}
+          description={t("deals.comboDealsDesc")}
+          userLocation={userLocation}
+        />
       </div>
 
       {/* Main Content */}
