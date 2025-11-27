@@ -20,7 +20,7 @@ const Header = ({ isRestaurantPage = false }) => {
       <div className="max-w-7xl mx-auto px-3 sm:px-4 py-2 sm:py-4 flex items-center justify-between">
         <div className="flex-shrink-0">
           <Link to="/">
-            <img src={jomfoodLogo} alt="JomFood" className="h-6 sm:h-8 w-auto" />
+            <img src={jomfoodLogo} alt="JomFood" className="h-16 sm:h-20 w-auto object-cover" />
           </Link>
         </div>
 
@@ -144,7 +144,7 @@ const Header = ({ isRestaurantPage = false }) => {
             <div className="flex flex-col h-full">
               {/* Header */}
               <div className="flex items-center justify-between p-4 border-b border-gray-200">
-                <img src={jomfoodLogo} alt="JomFood" className="h-6 w-auto" />
+                <img src={jomfoodLogo} alt="JomFood" className="h-16 sm:h-20 w-auto object-cover" />
                 <button
                   type="button"
                   onClick={() => setMobileOpen(false)}
