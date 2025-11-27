@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Search, Menu, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import jomfoodLogo from "../../assets/jomfood.png";
+import jomfoodLogo from "../../assets/jomfood-logo.png";
 import { useUser } from "../../context/UserContext";
 import SearchBar from "./SearchBar";
 import PWAInstallButton from "./PWAInstallButton";
