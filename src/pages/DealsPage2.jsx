@@ -1152,6 +1152,67 @@ const fixedDeals = deals.filter(deal => deal.deal_type === 'fixed_amount');
         </div>
       </div>
 
+      {/* Percentage Deals Section */}
+<div className="max-w-7xl mx-auto px-4 md:px-6 mt-2 pt-6">
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center gap-2">
+      <Percent className="w-6 h-6 text-primary" />
+      <h2 className="text-3xl font-bold text-gray-900">{t("deals.percentageDeals")}</h2>
+    </div>
+  </div>
+  {loading ? (
+    <p className="text-gray-600">{t("deals.loadingDeals")}</p>
+  ) : percentageDeals.length === 0 ? (
+    <p className="text-gray-600">{t("deals.noDealsFound")}</p>
+  ) : (
+    <div className="overflow-x-auto pb-2">
+      <div className="flex gap-4">
+        {percentageDeals.map((deal) => (
+          <div key={deal._id} className="flex-shrink-0 w-[280px]">
+            <DealCard deal={deal} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+{/* Fixed Deals Section */}
+<div className="max-w-7xl mx-auto px-4 md:px-6 mt-2 pt-6">
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center gap-2">
+      <Tag className="w-6 h-6 text-primary" />
+      <h2 className="text-3xl font-bold text-gray-900">{t("deals.fixedDeals")}</h2>
+    </div>
+  </div>
+  {loading ? (
+    <p className="text-gray-600">{t("deals.loadingDeals")}</p>
+  ) : fixedDeals.length === 0 ? (
+    <p className="text-gray-600">{t("deals.noDealsFound")}</p>
+  ) : (
+    <div className="overflow-x-auto pb-2">
+      <div className="flex gap-4">
+        {fixedDeals.map((deal) => (
+          <div key={deal._id} className="flex-shrink-0 w-[280px]">
+            <DealCard deal={deal} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )}
+</div>
+
+{/* Combo Deals Section */}
+<div className="max-w-7xl mx-auto px-4 md:px-6 mt-2 pt-6">
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center gap-2">
+      <Layers className="w-6 h-6 text-primary" />
+      <h2 className="text-3xl font-bold text-gray-900">{t("deals.comboDeals")}</h2>
+    </div>
+  </div>
+  {/* TODO: Render combo-type deals here */}
+</div>
+
       {/* Deal Type Sections */}
       <div className="bg-gray-50">
         <DealTypeSection
