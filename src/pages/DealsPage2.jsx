@@ -512,6 +512,9 @@ const DealsPage2 = () => {
     setShowFilters(prev => !prev);
   }, []);
 
+  // Derived deal buckets by type for the dedicated sections
+const percentageDeals = deals.filter(deal => deal.deal_type === 'percentage');
+const fixedDeals = deals.filter(deal => deal.deal_type === 'fixed_amount');
 
   if (error) {
     return (
