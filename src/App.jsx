@@ -14,29 +14,39 @@ import DealValidityPage from './pages/DealValidityPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import ScrollToTop from './components/common/ScrollToTop';
 import GoogleTranslate from './components/common/GoogleTranslate';
+import NotificationPermissionModal from './components/common/NotificationPermissionModal';
+import { useNotificationPermission } from './hooks/useNotificationPermission';
+
+function AppContent() {
+  const { showModal, handleClose } = useNotificationPermission();
+
+  return (
+    <div className="App">
+      <GoogleTranslate />
+      <ScrollToTop />
+      <Toaster richColors position="top-right" />
+      <NotificationPermissionModal isOpen={showModal} onClose={handleClose} />
+      <Routes>
+        <Route path="/" element={<DealsPage2 />} />
+        <Route path="/restaurants" element={<HomePage />} />
+        {/* <Route path="/" element={<HomePage />} />
+        <Route path="/deals" element={<DealsPage2 />} /> */}
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/deals-2" element={<DealsPage />} />
+        <Route path="/deal-validity" element={<DealValidityPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+      </Routes>
+    </div>
+  );
+}
 
 function App() {
   return (
     <ApiProvider>
       <UserProvider>
-        <div className="App">
-          <GoogleTranslate />
-          <ScrollToTop />
-          <Toaster richColors position="top-right" />
-          <Routes>
-
-            <Route path="/" element={<DealsPage2 />} />
-            <Route path="/restaurants" element={<HomePage />} />
-            {/* <Route path="/" element={<HomePage />} />
-            <Route path="/deals" element={<DealsPage2 />} /> */}
-            <Route path="/signup" element={<SignupPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/deals-2" element={<DealsPage />} />
-            <Route path="/deal-validity" element={<DealValidityPage />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          </Routes>
-        </div>
+        <AppContent />
       </UserProvider>
     </ApiProvider>
   );

@@ -218,6 +218,19 @@
     "serverError": "Ralat pelayan. Sila cuba lagi nanti.",
     "signupSuccess": "Selamat datang, {{name}}{{email}}!",
     "signupDefaultName": "Akaun"
+  },
+  "notifications": {
+    "title": "Dayakan Notifikasi",
+    "description": "Kekal dikemas kini dengan tawaran dan promosi terkini dari JomFood!",
+    "benefit1": "Dapatkan notifikasi tentang tawaran baharu dan tawaran khas",
+    "benefit2": "Terima kemas kini tentang tawaran yang telah anda tuntut",
+    "benefit3": "Jangan terlepas promosi masa terhad",
+    "allow": "Benarkan Notifikasi",
+    "notNow": "Bukan Sekarang",
+    "requesting": "Meminta...",
+    "permissionGranted": "Notifikasi didayakan dengan jayanya!",
+    "permissionDenied": "Kebenaran notifikasi ditolak. Anda boleh mendayakannya kemudian dalam tetapan pelayar anda.",
+    "errorRequesting": "Ralat meminta kebenaran notifikasi. Sila cuba lagi."
   }
 }
 

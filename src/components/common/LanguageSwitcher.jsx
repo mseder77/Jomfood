@@ -3,7 +3,7 @@ import { Languages, ChevronDown } from 'lucide-react';
 
 const LanguageSwitcher = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentLang, setCurrentLang] = useState('en'); // Track Google Translate language (en = no translation, ms = Malay)
+  const [currentLang, setCurrentLang] = useState('ms'); // Track Google Translate language (en = no translation, ms = Malay) - Default to Malay
   const dropdownRef = useRef(null);
 
   const languages = [
@@ -13,8 +13,8 @@ const LanguageSwitcher = () => {
 
   // Get current language from Google Translate or localStorage
   useEffect(() => {
-    // Check localStorage for saved language preference
-    const savedLang = localStorage.getItem('google_translate_lang') || 'en';
+    // Check localStorage for saved language preference, default to Malay
+    const savedLang = localStorage.getItem('google_translate_lang') || 'ms';
     setCurrentLang(savedLang);
     
     // Also check if Google Translate has already set a language
@@ -26,8 +26,8 @@ const LanguageSwitcher = () => {
           setCurrentLang(lang);
           localStorage.setItem('google_translate_lang', lang);
         } else {
-          // If Google Translate is ready but no language set, apply saved language
-          if (window.triggerGoogleTranslate && savedLang !== 'en') {
+          // If Google Translate is ready but no language set, apply saved language (default to Malay)
+          if (window.triggerGoogleTranslate) {
             setTimeout(() => {
               window.triggerGoogleTranslate(savedLang);
             }, 500);
@@ -59,7 +59,7 @@ const LanguageSwitcher = () => {
     };
   }, []);
 
-  const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0];
+  const currentLanguage = languages.find(lang => lang.code === currentLang) || languages[0]; // Default to first (Malay)
 
   const changeLanguage = (langCode) => {
     // Prevent any URL changes

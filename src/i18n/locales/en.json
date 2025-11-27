@@ -218,6 +218,19 @@
     "serverError": "Server error. Please try again later.",
     "signupSuccess": "Welcome, {{name}}{{email}}!",
     "signupDefaultName": "Account"
+  },
+  "notifications": {
+    "title": "Enable Notifications",
+    "description": "Stay updated with the latest deals and offers from JomFood!",
+    "benefit1": "Get notified about new deals and special offers",
+    "benefit2": "Receive updates on your claimed deals",
+    "benefit3": "Never miss out on limited-time promotions",
+    "allow": "Allow Notifications",
+    "notNow": "Not Now",
+    "requesting": "Requesting...",
+    "permissionGranted": "Notifications enabled successfully!",
+    "permissionDenied": "Notification permission was denied. You can enable it later in your browser settings.",
+    "errorRequesting": "Error requesting notification permission. Please try again."
   }
 }
 

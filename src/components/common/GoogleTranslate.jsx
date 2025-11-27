@@ -47,8 +47,8 @@ const GoogleTranslate = () => {
           console.log('Initializing Google Translate widget...');
           isInitialized = true;
           
-          // Get saved translation preference or default to English (no translation)
-          const savedLang = localStorage.getItem('google_translate_lang') || 'en';
+          // Get saved translation preference or default to Malay
+          const savedLang = localStorage.getItem('google_translate_lang') || 'ms';
           
           // Make sure the element exists
           const translateElement = document.getElementById('google_translate_element');
@@ -211,19 +211,17 @@ const GoogleTranslate = () => {
               // Dispatch ready event
               window.dispatchEvent(new CustomEvent('googleTranslateReady'));
               
-              // Set initial language if saved (and not English) - but only if cookie doesn't match
-              if (savedLang !== 'en') {
-                const currentCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
-                const expectedCookie = `/en/${savedLang}`;
-                
-                // Only trigger if cookie doesn't match saved language
-                if (!currentCookie || !currentCookie.includes(expectedCookie)) {
-                  setTimeout(() => {
-                    if (window.triggerGoogleTranslate) {
-                      window.triggerGoogleTranslate(savedLang);
-                    }
-                  }, 1000);
-                }
+              // Set initial language - default to Malay if no saved preference
+              const currentCookie = document.cookie.split('; ').find(row => row.startsWith('googtrans='));
+              const expectedCookie = `/en/${savedLang}`;
+              
+              // Only trigger if cookie doesn't match saved language
+              if (!currentCookie || !currentCookie.includes(expectedCookie)) {
+                setTimeout(() => {
+                  if (window.triggerGoogleTranslate) {
+                    window.triggerGoogleTranslate(savedLang);
+                  }
+                }, 1000);
               }
               
               return true;
