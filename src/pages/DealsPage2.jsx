@@ -9,7 +9,7 @@ import QRCodeModal from '../components/deals/QRCodeModal';
 import { toast } from '../utils/toast';
 import Header from '../components/layout/Header';
 import SearchInput from '../components/ui/SearchInput';
-import { Package, Flame, SlidersHorizontal, X, Tag, DollarSign, Percent, Sparkles, TrendingUp, TrendingDown, Clock, Plus, Star, Navigation, ChevronDown, Gift } from 'lucide-react';
+import { Package, Flame, SlidersHorizontal, X, Tag, DollarSign, Percent, Sparkles, TrendingUp, TrendingDown, Clock, Plus, Star, Navigation, ChevronDown, Gift, Layers } from 'lucide-react';
 import { useReservation } from '../hooks/useReservation';
 import { categoriesAPI, dealCategoriesAPI } from '../utils/api';
 import { useDebounce } from '../hooks/useDebounce';
