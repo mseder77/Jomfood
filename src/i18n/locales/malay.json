@@ -22,12 +22,14 @@
     "back": "Kembali",
     "backToHome": "Kembali ke Laman Utama",
     "next": "Seterusnya",
-    "previous": "Sebelumnya"
+    "previous": "Sebelumnya",
+    "tryAgain": "Cuba Lagi"
   },
   "header": {
     "explore": "TEROKA",
     "deals": "Tawaran",
     "restaurants": "Restoran",
+    "restaurantRequest": "Permintaan Restoran",
     "myList": "SENARAI SAYA",
     "list": "SENARAI"
   },
@@ -221,6 +223,7 @@
   },
   "notifications": {
     "title": "Dayakan Notifikasi",
+    "pageTitle": "Notifikasi",
     "description": "Kekal dikemas kini dengan tawaran dan promosi terkini dari JomFood!",
     "benefit1": "Dapatkan notifikasi tentang tawaran baharu dan tawaran khas",
     "benefit2": "Terima kemas kini tentang tawaran yang telah anda tuntut",
@@ -230,7 +233,79 @@
     "requesting": "Meminta...",
     "permissionGranted": "Notifikasi didayakan dengan jayanya!",
     "permissionDenied": "Kebenaran notifikasi ditolak. Anda boleh mendayakannya kemudian dalam tetapan pelayar anda.",
-    "errorRequesting": "Ralat meminta kebenaran notifikasi. Sila cuba lagi."
+    "errorRequesting": "Ralat meminta kebenaran notifikasi. Sila cuba lagi.",
+    "empty": "Tiada notifikasi lagi",
+    "emptyDescription": "Notifikasi anda akan muncul di sini",
+    "all": "Semua",
+    "unread": "Belum Dibaca",
+    "read": "Dibaca",
+    "markAllAsRead": "Tandakan semua sebagai dibaca",
+    "recent": "Notifikasi Terkini",
+    "noUnread": "Tiada notifikasi belum dibaca",
+    "viewAll": "Lihat Semua Notifikasi",
+    "totalCount": "{{count}} notifikasi",
+    "marking": "Menandakan..."
+  },
+  "restaurantRequest": {
+    "title": "Hantar Permintaan Restoran",
+    "subtitle": "Isi borang di bawah untuk menghantar maklumat restoran anda untuk semakan",
+    "sections": {
+      "restaurantInfo": "Maklumat Restoran",
+      "address": "Alamat",
+      "contactPerson": "Orang yang Dihubungi",
+      "socialMedia": "Media Sosial"
+    },
+    "fields": {
+      "restaurantName": "Nama Restoran",
+      "restaurantType": "Jenis Restoran",
+      "city": "Bandar",
+      "state": "Negeri",
+      "area": "Kawasan",
+      "zipCode": "Poskod",
+      "contactName": "Nama Orang yang Dihubungi",
+      "phone": "Nombor Telefon",
+      "whatsapp": "Nombor WhatsApp",
+      "email": "E-mel",
+      "website": "Laman Web",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "placeholders": {
+      "restaurantName": "Masukkan nama restoran",
+      "selectType": "Pilih jenis restoran",
+      "city": "cth., Kuala Lumpur",
+      "state": "cth., Selangor",
+      "area": "cth., Bukit Bintang",
+      "zipCode": "cth., 50000",
+      "contactName": "Masukkan nama orang yang dihubungi",
+      "phone": "cth., +60123456789",
+      "whatsapp": "cth., +60123456789",
+      "email": "cth., john@example.com",
+      "website": "https://www.example.com",
+      "facebook": "https://facebook.com/restaurant",
+      "instagram": "https://instagram.com/restaurant",
+      "tiktok": "https://tiktok.com/@restaurant"
+    },
+    "validation": {
+      "nameRequired": "Nama restoran diperlukan",
+      "typeRequired": "Jenis restoran diperlukan",
+      "cityRequired": "Bandar diperlukan",
+      "stateRequired": "Negeri diperlukan",
+      "areaRequired": "Kawasan diperlukan",
+      "zipCodeRequired": "Poskod diperlukan",
+      "contactNameRequired": "Nama orang yang dihubungi diperlukan",
+      "phoneRequired": "Nombor telefon diperlukan",
+      "whatsappRequired": "Nombor WhatsApp diperlukan",
+      "emailRequired": "E-mel diperlukan",
+      "emailInvalid": "Sila masukkan alamat e-mel yang sah"
+    },
+    "submitButton": "Hantar Permintaan",
+    "submitting": "Menghantar...",
+    "submitSuccess": "Maklumat restoran berjaya dihantar! Kami akan menyemak permintaan anda dan akan menghubungi anda tidak lama lagi.",
+    "submitError": "Gagal menghantar permintaan restoran. Sila cuba lagi.",
+    "socialMediaNote": "Semua medan media sosial adalah pilihan",
+    "note": "Penyerahan anda akan disemak oleh pasukan kami."
   }
 }
 

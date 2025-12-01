@@ -53,7 +53,7 @@ export const useNotificationPermission = () => {
     };
 
     checkPermission();
-  }, [location.pathname]); // Re-check on route change
+  }, []); // Re-check on route change
 
   const handleClose = () => {
     setShowModal(false);

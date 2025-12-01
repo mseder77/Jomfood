@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { reservation } from '../utils/reservation';
 
 export const useReservation = (module, returnPath = '') => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [reservedItem, setReservedItem] = useState(null);
   const [autoOpenId, setAutoOpenId] = useState(null);
 
@@ -38,6 +38,20 @@ export const useReservation = (module, returnPath = '') => {
 
   const clearAutoOpen = () => {
     setAutoOpenId(null);
+    
+    // Remove dealId and autoOpen params from URL
+    const newSearchParams = new URLSearchParams(searchParams);
+    const moduleIdParam = `${module}Id`;
+    
+    if (newSearchParams.has(moduleIdParam)) {
+      newSearchParams.delete(moduleIdParam);
+    }
+    if (newSearchParams.has('autoOpen')) {
+      newSearchParams.delete('autoOpen');
+    }
+    
+    // Update URL without the params using setSearchParams
+    setSearchParams(newSearchParams, { replace: true });
   };
 
   const clearReservedItem = () => {

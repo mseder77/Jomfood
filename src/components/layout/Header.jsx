@@ -7,6 +7,7 @@ import { useUser } from "../../context/UserContext";
 import SearchBar from "./SearchBar";
 import PWAInstallButton from "./PWAInstallButton";
 import LanguageSwitcher from "../common/LanguageSwitcher";
+import NotificationBell from "../common/NotificationBell";
 
 const Header = ({ isRestaurantPage = false }) => {
   const { user, logout } = useUser();
@@ -65,6 +66,12 @@ const Header = ({ isRestaurantPage = false }) => {
           >
             <span className="sm:inline">{t('header.restaurants')}</span>
           </Link>
+          <Link
+            to="/restaurant-request"
+            className="flex items-center gap-1 sm:gap-2 text-gray-700 hover:text-primary transition-colors text-xs sm:text-sm font-medium"
+          >
+            <span className="sm:inline">{t('header.restaurantRequest')}</span>
+          </Link>
           {/* <button
             className="text-gray-700 hover:text-primary transition-colors text-xs sm:text-sm font-medium"
             type="button"
@@ -89,6 +96,7 @@ const Header = ({ isRestaurantPage = false }) => {
             </div>
           ) : (
             <div className="flex items-center gap-2">
+              <NotificationBell />
               <div className="relative">
                 <button
                   type="button"
@@ -178,6 +186,13 @@ const Header = ({ isRestaurantPage = false }) => {
                   >
                     {t('header.restaurants').toUpperCase()}
                   </Link>
+                  <Link
+                    to="/restaurant-request"
+                    className="flex items-center px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg text-base font-medium transition-colors"
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    {t('header.restaurantRequest').toUpperCase()}
+                  </Link>
                 </div>
                 
                 {!user ? (
@@ -199,6 +214,13 @@ const Header = ({ isRestaurantPage = false }) => {
                   </div>
                 ) : (
                   <div className="pt-4 space-y-2">
+                    <Link
+                      to="/notifications"
+                      className="flex items-center px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg text-base font-medium transition-colors"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {t('notifications.pageTitle', 'Notifications')}
+                    </Link>
                     <Link
                       to="/profile"
                       className="flex items-center px-3 py-3 text-gray-700 hover:text-primary hover:bg-gray-50 rounded-lg text-base font-medium transition-colors"

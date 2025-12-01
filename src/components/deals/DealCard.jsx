@@ -17,7 +17,7 @@ const DealCard = ({ deal, disableHoverEffect = false }) => {
   const formatPrice = (price) => `RM ${price.toFixed(2)}`;
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const locale = i18n.language === 'ms' ? 'ms-MY' : 'en-GB';
+    const locale = i18n.language === 'malay' ? 'ms-MY' : 'en-GB';
     return date.toLocaleDateString(locale, {
       day: '2-digit',
       month: 'short',

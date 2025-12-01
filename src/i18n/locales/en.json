@@ -22,12 +22,14 @@
     "back": "Back",
     "backToHome": "Back to Home",
     "next": "Next",
-    "previous": "Previous"
+    "previous": "Previous",
+    "tryAgain": "Try Again"
   },
   "header": {
     "explore": "EXPLORE",
     "deals": "Deals",
     "restaurants": "Restaurants",
+    "restaurantRequest": "Restaurant Request",
     "myList": "MY LIST",
     "list": "LIST"
   },
@@ -221,6 +223,7 @@
   },
   "notifications": {
     "title": "Enable Notifications",
+    "pageTitle": "Notifications",
     "description": "Stay updated with the latest deals and offers from JomFood!",
     "benefit1": "Get notified about new deals and special offers",
     "benefit2": "Receive updates on your claimed deals",
@@ -230,7 +233,79 @@
     "requesting": "Requesting...",
     "permissionGranted": "Notifications enabled successfully!",
     "permissionDenied": "Notification permission was denied. You can enable it later in your browser settings.",
-    "errorRequesting": "Error requesting notification permission. Please try again."
+    "errorRequesting": "Error requesting notification permission. Please try again.",
+    "empty": "No notifications yet",
+    "emptyDescription": "Your notifications will appear here",
+    "all": "All",
+    "unread": "Unread",
+    "read": "Read",
+    "markAllAsRead": "Mark all as read",
+    "recent": "Recent Notifications",
+    "noUnread": "No unread notifications",
+    "viewAll": "View All Notifications",
+    "totalCount": "{{count}} notifications",
+    "marking": "Marking..."
+  },
+  "restaurantRequest": {
+    "title": "Submit Restaurant Request",
+    "subtitle": "Fill out the form below to submit your restaurant information for review",
+    "sections": {
+      "restaurantInfo": "Restaurant Information",
+      "address": "Address",
+      "contactPerson": "Contact Person",
+      "socialMedia": "Social Media"
+    },
+    "fields": {
+      "restaurantName": "Restaurant Name",
+      "restaurantType": "Restaurant Type",
+      "city": "City",
+      "state": "State",
+      "area": "Area",
+      "zipCode": "Zip Code",
+      "contactName": "Contact Person Name",
+      "phone": "Phone Number",
+      "whatsapp": "WhatsApp Number",
+      "email": "Email",
+      "website": "Website",
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "tiktok": "TikTok"
+    },
+    "placeholders": {
+      "restaurantName": "Enter restaurant name",
+      "selectType": "Select restaurant type",
+      "city": "e.g., Kuala Lumpur",
+      "state": "e.g., Selangor",
+      "area": "e.g., Bukit Bintang",
+      "zipCode": "e.g., 50000",
+      "contactName": "Enter contact person name",
+      "phone": "e.g., +60123456789",
+      "whatsapp": "e.g., +60123456789",
+      "email": "e.g., john@example.com",
+      "website": "https://www.example.com",
+      "facebook": "https://facebook.com/restaurant",
+      "instagram": "https://instagram.com/restaurant",
+      "tiktok": "https://tiktok.com/@restaurant"
+    },
+    "validation": {
+      "nameRequired": "Restaurant name is required",
+      "typeRequired": "Restaurant type is required",
+      "cityRequired": "City is required",
+      "stateRequired": "State is required",
+      "areaRequired": "Area is required",
+      "zipCodeRequired": "Zip code is required",
+      "contactNameRequired": "Contact person name is required",
+      "phoneRequired": "Phone number is required",
+      "whatsappRequired": "WhatsApp number is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Please enter a valid email address"
+    },
+    "submitButton": "Submit Request",
+    "submitting": "Submitting...",
+    "submitSuccess": "Restaurant information submitted successfully! We will review your request and get back to you soon.",
+    "submitError": "Failed to submit restaurant request. Please try again.",
+    "socialMediaNote": "All social media fields are optional",
+    "note": "Your submission will be reviewed by our team."
   }
 }
 

@@ -67,104 +67,14 @@ initializeMessaging().then((messagingInstance) => {
     }
 });
 
-// ✅ Fallback: Handle standard push events (in case FCM fails or DevTools test)
-self.addEventListener("push", function (event) {
-    // Check notification permission
-    if (self.Notification.permission !== 'granted') {
-        return;
-    }
-
-    let notificationData = {
-        title: "New Notification",
-        body: "You have a new notification",
-        icon: "/jomfood-rlc0lk0I.png",
-        badge: "/jomfood-rlc0lk0I.png"
-    };
-
-    // Try to parse notification data
-    if (event.data) {
-        try {
-            // Handle different data formats
-            let data;
-            let textData = null;
-            
-            // First, try to get text data (for DevTools plain text testing)
-            try {
-                if (event.data.text) {
-                    textData = event.data.text();
-                } else if (typeof event.data === 'string') {
-                    textData = event.data;
-                }
-            } catch (textError) {
-                // Ignore text extraction errors
-            }
-            
-            // Try to parse as JSON if we have text data
-            if (textData) {
-                try {
-                    // Try to parse as JSON first
-                    data = JSON.parse(textData);
-                } catch (jsonError) {
-                    // If JSON parsing fails, it's plain text (like DevTools test)
-                    notificationData.body = textData;
-                    data = null;
-                }
-            } else {
-                // Try JSON method
-                try {
-                    data = event.data.json();
-                } catch (jsonError) {
-                    // If json() fails, try direct access
-                    data = event.data;
-                }
-            }
-            
-            // Only process JSON data structure if we have parsed JSON
-            if (data && typeof data === 'object') {
-                notificationData = {
-                    title: data.notification?.title || data.title || notificationData.title,
-                    body: data.notification?.body || data.body || data.message || notificationData.body,
-                    icon: data.notification?.icon || data.icon || notificationData.icon,
-                    badge: data.notification?.badge || data.badge || notificationData.badge,
-                    data: data.data || data
-                };
-            }
-            // If data is null, we already set the body from plain text above
-            
-        } catch (e) {
-            // Fallback: try to get text and use as body
-            try {
-                if (event.data.text) {
-                    notificationData.body = event.data.text();
-                } else if (typeof event.data === 'string') {
-                    notificationData.body = event.data;
-                }
-            } catch (fallbackError) {
-                // Ignore fallback errors
-            }
-        }
-    }
-
-    // Show notification
-    const notificationPromise = self.registration.showNotification(notificationData.title, {
-        body: notificationData.body,
-        icon: notificationData.icon,
-        badge: notificationData.badge,
-        data: notificationData.data || {},
-        tag: 'jomfood-push-notification',
-        requireInteraction: false,
-        silent: false
-    }).catch(error => {
-        console.error("Error showing notification:", error);
-        // Try again with minimal options
-        return self.registration.showNotification(notificationData.title, {
-            body: notificationData.body,
-            tag: 'jomfood-push-minimal'
-        });
-    });
-
-    event.waitUntil(notificationPromise);
-});
+// ❌ REMOVED: Standard push event listener
+// This was causing duplicate notifications because:
+// 1. FCM's onBackgroundMessage already handles background notifications
+// 2. Having both onBackgroundMessage AND push event listener = 2 notifications
+// 3. Firebase handles push events automatically through onBackgroundMessage
+// 
+// If you need to test with DevTools, use the FCM test tool or send through Firebase Console
+// The onBackgroundMessage handler above is sufficient for all FCM notifications
 
 // Handle notification clicks
 self.addEventListener("notificationclick", function (event) {

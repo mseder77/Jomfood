@@ -1,4 +1,7 @@
 // API Configuration and Utilities
+import http from './http';
+import i18n from '../i18n/config';
+
 const API_BASE_URL = import.meta.env.VITE_APP_API_BASE_URL || 'http://localhost:5055/api';
 
 // Generic API request function
@@ -94,8 +97,17 @@ export const restaurantAPI = {
 export const categoriesAPI = {
   // Get all categories
   getCategories: (params = {}) => {
+    // Get current language from i18n (malay or en)
+    const currentLang = i18n.language || 'en';
+    const langParam = currentLang === 'malay' ? 'malay' : 'en';
+    
+    // Build query parameters
     const queryParams = new URLSearchParams(params);
-    return api.get(`/jomfood-categories?${queryParams}`);
+    
+    // Add language parameter
+    queryParams.set('lang', langParam);
+    
+    return api.get(`/jomfood-categories?${queryParams.toString()}`);
   },
 
   // Get single category
@@ -172,13 +184,29 @@ export const userAPI = {
 export const dealsAPI = {
   // Get active deals (public, no auth required)
   getActiveDeals: (queryString = '') => {
-    // If queryString is provided, use it directly
+    // Get current language from i18n (malay or en)
+    const currentLang = i18n.language || 'en';
+    const langParam = currentLang === 'malay' ? 'malay' : 'en';
+    
+    // Build query parameters
+    const queryParams = new URLSearchParams();
+    
+    // Add language parameter
+    queryParams.append('lang', langParam);
+    
+    // If queryString is provided, parse and merge it
     if (queryString) {
-      return api.get(`/jomfood-deals/active?${queryString}`);
+      const existingParams = new URLSearchParams(queryString);
+      // Add all existing params (lang will be overwritten if it exists, which is fine)
+      existingParams.forEach((value, key) => {
+        queryParams.set(key, value);
+      });
     }
     
-    // Default call without any parameters
-    return api.get(`/jomfood-deals/active`);
+    // Ensure lang is always set (in case it was removed by existing params)
+    queryParams.set('lang', langParam);
+    
+    return api.get(`/jomfood-deals/active?${queryParams.toString()}`);
   },
 
   // Get deal by ID (public, no auth required)
@@ -192,15 +220,30 @@ export const dealsAPI = {
   },
 
   // Get all available tags
-  getAllTags: () => api.get('/jomfood-deals/tags'),
+  getAllTags: () => {
+    // Get current language from i18n (malay or en)
+    const currentLang = i18n.language || 'en';
+    const langParam = currentLang === 'malay' ? 'malay' : 'en';
+    
+    return api.get(`/jomfood-deals/tags?lang=${langParam}`);
+  },
 };
 
 // Deal Categories API endpoints
 export const dealCategoriesAPI = {
   // Get active deal categories
   getActiveDealCategories: (params = {}) => {
+    // Get current language from i18n (malay or en)
+    const currentLang = i18n.language || 'en';
+    const langParam = currentLang === 'malay' ? 'malay' : 'en';
+    
+    // Build query parameters
     const queryParams = new URLSearchParams(params);
-    return api.get(`/jomfood-deal-categories/active?${queryParams}`);
+    
+    // Add language parameter
+    queryParams.set('lang', langParam);
+    
+    return api.get(`/jomfood-deal-categories/active?${queryParams.toString()}`);
   },
 };
 
@@ -252,6 +295,45 @@ export const googleOAuthAPI = {
       given_name: userInfo.given_name,
       family_name: userInfo.family_name
     });
+  },
+};
+
+// Notifications API endpoints (using http for auth interceptors)
+export const notificationsAPI = {
+  // Get customer notifications
+  getNotifications: (customerId, params = {}) => {
+    const queryParams = new URLSearchParams();
+    if (params.page) queryParams.append('page', params.page);
+    if (params.limit) queryParams.append('limit', params.limit);
+    if (params.status) queryParams.append('status', params.status);
+    
+    const queryString = queryParams.toString();
+    return http.get(`/jomfood/notifications/customer/${customerId}${queryString ? `?${queryString}` : ''}`);
+  },
+
+  // Mark notification as read
+  markAsRead: (notificationId, customerId) => {
+    return http.patch(`/jomfood/notifications/customer/${notificationId}/read`, {
+      customerId
+    });
+  },
+
+  // Mark all notifications as read
+  markAllAsRead: (customerId) => {
+    return http.patch(`/jomfood/notifications/customer/${customerId}/read-all`);
+  },
+
+  // Get unread count
+  getUnreadCount: (customerId) => {
+    return http.get(`/jomfood/notifications/customer/${customerId}/unread-count`);
+  },
+};
+
+// Business Request API endpoints (public endpoint, no auth required)
+export const businessRequestAPI = {
+  // Submit restaurant information request (public, no auth required)
+  submitRequest: (data) => {
+    return api.post('/business-request', data);
   },
 };
 

@@ -150,42 +150,17 @@ export async function initializeNotifications(customerId) {
 
 /**
  * Sets up listener for foreground messages (when app tab is active)
+ * NOTE: We don't show a notification here because:
+ * 1. When app is in foreground, we just update the UI (red dot indicator)
+ * 2. The service worker will handle background notifications
+ * 3. Showing notification here would cause duplicates
  */
 function setupForegroundMessageListener(messagingInstance) {
   onMessage(messagingInstance, (payload) => {
-    const title = payload.notification?.title || "New Notification";
-    const body = payload.notification?.body || "You have a new notification";
-    const data = payload.data || {};
-
-    // Show notification in app
-    if ("Notification" in window && Notification.permission === "granted") {
-      try {
-        const notification = new Notification(title, {
-          body: body,
-          icon: data.icon || "/jomfood-rlc0lk0I.png",
-          badge: "/jomfood-rlc0lk0I.png",
-          data: data,
-          tag: data.tag || 'jomfood-notification',
-          requireInteraction: false
-        });
-        
-        // Auto-close after 5 seconds
-        setTimeout(() => {
-          notification.close();
-        }, 5000);
-        
-        // Handle click
-        notification.onclick = () => {
-          window.focus();
-          notification.close();
-          if (data.url) {
-            window.open(data.url, '_blank');
-          }
-        };
-      } catch (notifError) {
-        console.error("Error showing foreground notification:", notifError);
-      }
-    }
+    // Just log the notification - don't show it
+    // The NotificationContext will handle UI updates (red dot indicator)
+    console.log('Foreground notification received:', payload);
+    // UI updates are handled by NotificationContext
   });
 }
 

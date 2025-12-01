@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import msTranslations from './locales/ms.json';
+import malayTranslations from './locales/malay.json';
 import enTranslations from './locales/en.json';
 
 i18n
@@ -10,22 +10,24 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      ms: {
-        translation: msTranslations
+      malay: {
+        translation: malayTranslations
       },
       en: {
         translation: enTranslations
       }
     },
-    fallbackLng: 'en', // Use English as base language - Google Translate will translate the page
-    lng: 'en', // Fixed to English - Google Translate handles translation
+    fallbackLng: 'en',
+    // lng: 'en', // REMOVED: Allow dynamic language switching via LanguageDetector
+    // Google Translate was using fixed 'en' - now using i18n dynamic switching
     debug: false,
     interpolation: {
       escapeValue: false // React already escapes values
     },
     detection: {
       order: ['localStorage', 'navigator'],
-      caches: ['localStorage']
+      caches: ['localStorage'],
+      lookupLocalStorage: 'i18nextLng' // i18n's default localStorage key
     }
   });
 

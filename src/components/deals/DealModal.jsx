@@ -83,7 +83,7 @@ const DealModal = ({ deal, onClose, onDealClaimed }) => {
   }, [fullDeal.end_date]);
 
   const formatPrice = (price) => `RM ${price.toFixed(2)}`;
-  const getLocale = () => (i18n.language === 'ms' ? 'ms-MY' : 'en-GB');
+  const getLocale = () => (i18n.language === 'malay' ? 'ms-MY' : 'en-GB');
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleDateString(getLocale(), { 
